@@ -1,9 +1,13 @@
 package com.example.chohaeun.myapplication;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
     private Questions questions = new Questions();
     private String mAnswer;
-    private int mScore = 0;
+    public int mScore = 0;
     private int questionsLength = questions.mQuestions.length;
     private int qCount = 0;
 
     Random r;
+
+    int alreadyPlayed =0;
 
     TextView score, question;
 
@@ -35,14 +41,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         r = new Random();
 
@@ -54,77 +52,83 @@ public class MainActivity extends AppCompatActivity {
         score = (TextView) findViewById(R.id.score);
         question = (TextView) findViewById(R.id.textView2);
 
-        score.setText("Score: " + mScore);
+        score.setText("Score: " + mScore + "/" + questionsLength);
 
-        updateQuestion(r.nextInt(questionsLength));
+        updateQuestion(alreadyPlayed);
 
         answerA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answerA.getText() == mAnswer){
+                alreadyPlayed++;
+                if(answerA.getText() == mAnswer) {
                     mScore++;
-                    score.setText("Score: " + mScore + "/" + questionsLength);
-                    updateQuestion(r.nextInt(questionsLength));
+                    correctAnswer();
+                    answerA.setBackgroundColor(Color.GREEN);
                 }
-
                 else {
-                    updateQuestion(r.nextInt(questionsLength));
-                    answerA.setHighlightColor(Color.RED);
+                    answerA.setBackgroundColor(Color.RED);
+                    incorrectAnswer();
                 }
-
-                qCount++;
-
             }
         });
 
         answerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alreadyPlayed++;
                 if(answerB.getText() == mAnswer){
                     mScore++;
-                    score.setText("Score: " + mScore + "/" + questionsLength);
-                    updateQuestion(r.nextInt(questionsLength));
-                }
+                    correctAnswer();
+                    answerB.setBackgroundColor(Color.GREEN);
+             }
 
                 else {
-                    updateQuestion(r.nextInt(questionsLength));
+                    answerB.setBackgroundColor(Color.RED);
+                    incorrectAnswer();
                 }
 
-                qCount++;
             }
         });
 
         answerC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alreadyPlayed++;
                 if(answerC.getText() == mAnswer){
                     mScore++;
-                    score.setText("Score: " + mScore + "/" + questionsLength);
-                    updateQuestion(r.nextInt(questionsLength));
-                }
+                    answerC.setBackgroundColor(Color.GREEN);
+                    correctAnswer();                }
 
                 else {
-                    updateQuestion(r.nextInt(questionsLength));
+                    answerC.setBackgroundColor(Color.RED);
+                    incorrectAnswer();
                 }
-                qCount++;
+
+
             }
         });
 
         answerD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alreadyPlayed++;
                 if(answerD.getText() == mAnswer){
                     mScore++;
-                    score.setText("Score: " + mScore + "/" + questionsLength);
-                    updateQuestion(r.nextInt(questionsLength));
+                    answerD.setBackgroundColor(Color.GREEN);
+                    correctAnswer();
                 }
 
                 else {
-                    updateQuestion(r.nextInt(questionsLength));
+                    answerD.setBackgroundColor(Color.RED);
+                    incorrectAnswer();
                 }
-                qCount++;
+
+
+
             }
         });
+
+
     }
 
     private void updateQuestion(int n){
@@ -159,5 +163,81 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void correctAnswer(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Correct!")
+                //.setMessage("Final Score is " + mScore + "/10")
+
+                .setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        score.setText("Score: " + mScore + "/" + questionsLength);
+                        updateQuestion(alreadyPlayed);
+                        qCount++;
+                        resetColor(answerA);
+                        resetColor(answerB);
+                        resetColor(answerC);
+                        resetColor(answerD);
+                        if(qCount == 10) {
+                            endgame();
+                        }
+                    }
+                })
+
+                .show();
+
+    }
+
+    public void incorrectAnswer(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Incorrect!")
+                .setMessage("The correct answer is " + mAnswer)
+
+                .setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        score.setText("Score: " + mScore + "/" + questionsLength);
+                        qCount++;
+                        resetColor(answerA);
+                        resetColor(answerB);
+                        resetColor(answerC);
+                        resetColor(answerD);
+                        if(qCount == 10) {
+                            endgame();
+                        }
+                        else{
+                            updateQuestion(alreadyPlayed);
+                        }
+                    }
+                })
+
+                .show();
+
+    }
+
+    public void endgame() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Game Over")
+                .setMessage("Final Score is " + mScore + "/10")
+
+                .setNegativeButton("Play Again", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        recreate();
+                    }
+                })
+                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainActivity.this, welcomeScreen.class);
+                        startActivity(intent);
+                    }
+                })
+
+                .show()
+                .setCancelable(false);
+    }
+
+    public void resetColor(Button b)
+    {
+        b.setBackgroundResource(android.R.drawable.btn_default);
     }
 }

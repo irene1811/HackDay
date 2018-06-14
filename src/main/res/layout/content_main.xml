@@ -10,143 +10,98 @@
     tools:context="com.example.chohaeun.myapplication.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TableLayout
-        android:layout_width="442dp"
-        android:layout_height="573dp"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="30dp">
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="score"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteY="6dp"
+        tools:layout_editor_absoluteX="292dp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137" />
 
-            <TextView
-                android:id="@+id/score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:text="Score"
-                android:textSize="30sp" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="293dp"
+        android:layout_height="87dp"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/button2" />
 
-        </TableRow>
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="293dp"
+        android:layout_height="87dp"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/button3" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="293dp"
+        android:layout_height="87dp"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/button4" />
 
-            <Space
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
-        </TableRow>
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="293dp"
+        android:layout_height="87dp"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="20dp"
+        tools:layout_editor_absoluteX="0dp" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="40dp"
-                android:layout_weight="1"
-                android:text="What is an IDE?"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="25sp"
-                tools:layout_editor_absoluteX="258dp"
-                tools:layout_editor_absoluteY="45dp" />
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline2"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="20dp"
+        tools:layout_editor_absoluteX="0dp" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="90dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="50dp"
-                android:layout_height="85dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="75dp"
-                android:text="Answer Choice 1"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="277dp"
-                tools:layout_editor_absoluteY="197dp" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="100dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="340dp"
-                android:layout_height="85dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="75dp"
-                android:text="Answer Choice 2"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="275dp"
-                tools:layout_editor_absoluteY="286dp" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="100dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="340dp"
-                android:layout_height="85dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="75dp"
-                android:text="Answer Choice 3"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="258dp"
-                tools:layout_editor_absoluteY="334dp" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="100dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="340dp"
-                android:layout_height="85dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="75dp"
-                android:text="Answer Choice 4"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="201dp"
-                tools:layout_editor_absoluteY="418dp" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="100dp" />
-        </TableRow>
-    </TableLayout>
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline3"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
 
 </android.support.constraint.ConstraintLayout>
 
